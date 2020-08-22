@@ -1,1 +1,13 @@
+function asdf_install_plugins() {
+    pluginlist="$(asdf plugin list)"
+    while read -r plugin; do
+        echo "${pluginlist}" | grep ${plugin%% *} > /dev/null 2>&1
+        if [ $? -ne 0 ]; then
+            asdf plugin add $plugin
+        fi
+    done < ~/.asdf-plugins
+}
+
 source $(brew --prefix asdf)/asdf.sh
+asdf_install_plugins
+

@@ -1,0 +1,8 @@
+aws-vault https://github.com/beardix/asdf-aws-vault.git
+helm
+kops
+kube-capacity
+kubectl
+rbac-lookup
+reckoner
+yq
