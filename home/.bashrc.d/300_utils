@@ -1,0 +1,18 @@
+function b64d()
+{
+    echo "$1" | base64 --decode
+}
+
+function checkoutpr()
+{
+    if [ "$2" == "" ]; then
+        echo "No PR number specified"
+        echo "checkoutpr [remote] [PRnum]"
+        return 1
+    fi
+    git fetch $1 refs/pull/$2/merge
+    git checkout FETCH_HEAD
+}
+
+export PATH="$PATH:~/bin"
+

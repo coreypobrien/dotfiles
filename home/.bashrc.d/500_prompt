@@ -1,0 +1,29 @@
+PS1='$(gbt $?)'
+
+export VIRTUAL_ENV_DISABLE_PROMPT='1'
+
+export GBT_CARS='Time, Git,  Kubectl, Dir, Status, Sign'
+export GBT_CAR_TIME_FORMAT='{{Time}}'
+export GBT_CAR_TIME_TIME_FORMAT='15:04'
+
+export GBT_CAR_GIT_FORMAT='{{ Icon }} {{ Head }}'
+export GBT_CAR_GIT_BG='black'
+export GBT_CAR_GIT_FG='gray'
+
+export GBT_CAR_KUBECTL_FORMAT='{{ Icon }} {{ Context }}'
+export GBT_CAR_KUBECTL_BG='black'
+export GBT_CAR_KUBECTL_FG='30'
+
+export GBT_CAR_DIR_FORMAT='{{ Dir }}'
+export GBT_CAR_DIR_BG='black'
+export GBT_CAR_DIR_FG='27'
+
+export GBT_CAR_SIGN_FORMAT='{{Symbol}} '
+
+# Reactiveops
+export GBT_CAR_CUSTOMRO_FORMAT='🚀 {{ Text }}'
+export GBT_CAR_CUSTOMRO_TEXT_CMD="echo ${PROJECT}-${INVENTORY}"
+export GBT_CAR_CUSTOMRO_BG='black'
+export GBT_CAR_CUSTOMRO_FG='red'
+export GBT_CAR_CUSTOMRO_DISPLAY_CMD="[[ ! -z ${PROJECT} ]] && echo YES"
+

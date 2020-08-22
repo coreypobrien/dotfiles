@@ -1,0 +1,10 @@
+aws-vault 5.4.4
+helm 3.3.0
+kops v1.16.4
+kube-capacity 0.3.3
+kubectl 1.18.6
+rbac-lookup 0.6.0
+reckoner 2.2.0
+vault 1.4.1
+yq 3.3.2
+

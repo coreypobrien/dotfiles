@@ -1,0 +1,6 @@
+# source ${HOME}/.pentagon/config
+source /Users/corey/.cuddlefish/config
+#alias pw=pentagon_workon
+alias pw="cuddlectl use"
+alias cc="cuddlectl use"
+export BASTION_USERNAME=coreypobrien

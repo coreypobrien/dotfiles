@@ -1,0 +1,20 @@
+source "$HOME/.homesick/repos/homeshick/homeshick.sh"
+source "$HOME/.homesick/repos/homeshick/completions/homeshick-completion.bash"
+
+function homeshick_save_secrets() {
+  for f in $(find "$HOME/.homesick/repos/dotfiles/home" -name '*.asc'); do
+    source="$HOME/${f#$HOME/.homesick/repos/dotfiles/home/}"
+    source="${source%.asc}.secret"
+    keybase pgp encrypt -i "$source" -o "$f"
+  done
+}
+
+function homeshick_load_secrets() {
+  set -x
+  for f in $(find "$HOME/.homesick/repos/dotfiles/home" -name '*.asc'); do
+    dest="$HOME/${f#$HOME/.homesick/repos/dotfiles/home/}"
+    dest="${dest%.asc}.secret"
+    keybase pgp decrypt -i "$f" -o "$dest"
+  done
+}
+

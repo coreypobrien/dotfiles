@@ -1,0 +1,6 @@
+export PYTHONDONTWRITEBYTECODE=1
+
+export PATH="$PATH:/usr/local/opt/python@3/libexec/bin"
+#export PATH="$PATH:/usr/local/Cellar/python/$(ls /usr/local/Cellar/python@3.8)/bin"
+export PATH="$PATH:/Users/corey/Library/Python/2.7/bin"
+export PYTHONWARNINGS="ignore:DEPRECATION::pip._internal.cli.base_command"

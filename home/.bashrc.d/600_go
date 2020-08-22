@@ -1,0 +1,2 @@
+export PATH="$PATH:$HOME/src/go/bin" #go binaries
+export GOPATH="$HOME/src/go/"
