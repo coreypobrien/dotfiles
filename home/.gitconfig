@@ -15,3 +15,5 @@ email = corey@fairwinds.com
 	insteadOf = https://github.com/
 [pull]
 	ff = only
+[diff "bin"]
+    textconv = hexdump -v -C

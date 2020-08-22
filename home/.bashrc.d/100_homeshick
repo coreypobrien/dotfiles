@@ -10,7 +10,6 @@ function homeshick_save_secrets() {
 }
 
 function homeshick_load_secrets() {
-  set -x
   for f in $(find "$HOME/.homesick/repos/dotfiles/home" -name '*.asc'); do
     dest="$HOME/${f#$HOME/.homesick/repos/dotfiles/home/}"
     dest="${dest%.asc}.secret"
