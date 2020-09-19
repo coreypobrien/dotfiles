@@ -1,6 +1,7 @@
 if [ -f ~/.cuddlefish/config ]; then
   source ~/.cuddlefish/config
 fi
-alias pw="cuddlectl use"
 alias cc="cuddlectl use"
+complete -F _complete_alias cc
 export BASTION_USERNAME=coreypobrien
+
