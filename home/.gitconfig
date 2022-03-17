@@ -1,8 +1,6 @@
-# This is Git's per-user configuration file.
 [user]
-# Please adapt and uncomment the following lines:
-name = Corey O'Brien
-email = corey@fairwinds.com
+    name = Corey O'Brien
+    email = coreypobrien@gmail.com
 [core]
 	editor = code --wait
 	excludesfile = /Users/corey/.gitignore_global
@@ -11,9 +9,14 @@ email = corey@fairwinds.com
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
-[url "git@github.com:"]
-	insteadOf = https://github.com/
 [pull]
 	ff = only
+[init]
+	defaultBranch = main
 [diff "bin"]
     textconv = hexdump -v -C
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[url "git@gitlab.com:"]
+	insteadOf = https://gitlab.com/
+
