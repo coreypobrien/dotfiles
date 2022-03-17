@@ -4,5 +4,4 @@ kops
 kube-capacity
 kubectl
 rbac-lookup
-reckoner
 yq
