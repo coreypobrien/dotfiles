@@ -1,10 +1,11 @@
-set tabstop=8
+set tabstop=4
 set softtabstop=0
 set expandtab
-set shiftwidth=4
+set shiftwidth=2
 set smarttab
 syntax on
 set number
+set relativenumber
 set termguicolors
 
 set nocompatible              " be iMproved, required
