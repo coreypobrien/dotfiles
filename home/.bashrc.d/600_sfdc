@@ -1,0 +1,2 @@
+eval 
+SF_AC_BASH_SETUP_PATH=/Users/coreyobrien/Library/Caches/sf/autocomplete/bash_setup && test -f $SF_AC_BASH_SETUP_PATH && source $SF_AC_BASH_SETUP_PATH; # sf autocomplete setup

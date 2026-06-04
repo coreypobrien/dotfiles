@@ -1,4 +1,4 @@
-export PATH="/usr/local/opt/curl/bin:$PATH"
-export LDFLAGS="-L/usr/local/opt/curl/lib"
-export CPPFLAGS="-I/usr/local/opt/curl/include"
+export PATH="$(brew --prefix curl)/bin:$PATH"
+export LDFLAGS="$LDFLAGS -L$(brew --prefix curl)/lib"
+export CPPFLAGS="$CPPFLAGS -I$(brew --prefix curl)/include"
 

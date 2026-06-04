@@ -1,4 +1,8 @@
 export EDITOR='code -w'
 defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
-export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+if [ -e "$HOME/Applications/Visual Studio Code.app" ]; then
+  export PATH="$PATH:$HOME/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+elif [ -e "/Applications/Visual Studio Code.app" ]; then
+  export PATH="$PATH:/Applications/Visual Studio Code.app/Contents/Resources/app/bin"
+fi
 

@@ -1,4 +1,6 @@
 # Use modern openssl
-export ARCHFLAGS="-arch x86_64"
-export LDFLAGS="-L/usr/local/opt/openssl/lib"
-export CFLAGS="-I/usr/local/opt/openssl/include"
+# export ARCHFLAGS="-arch x86_64"
+export LDFLAGS="$LDFLAGS -L$(brew --prefix openssl@3)/lib"
+export CFLAGS="$CFLAGS -I$(brew --prefix openssl@3)/include"
+export CPPFLAGS="$CPPFLAGS -I$(brew --prefix openssl@3)/include"
+

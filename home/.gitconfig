@@ -1,9 +1,10 @@
 [user]
-    name = Corey O'Brien
+    name = "Corey O'Brien"
     email = coreypobrien@gmail.com
+
 [core]
 	editor = code --wait
-	excludesfile = /Users/corey/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [filter "lfs"]
 	required = true
 	clean = git-lfs clean -- %f
@@ -13,10 +14,17 @@
 	ff = only
 [init]
 	defaultBranch = main
-[diff "bin"]
-    textconv = hexdump -v -C
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [url "git@gitlab.com:"]
 	insteadOf = https://gitlab.com/
+[difftool "default-difftool"]
+    cmd = code --wait --diff $LOCAL $REMOTE
+[diff "bin"]
+    textconv = hexdump -v -C
 
+[alias]
+    mr = !sh -c 'git fetch $1 merge-requests/$2/head:mr-$1-$2 && git checkout mr-$1-$2' -
+
+[include]
+    path = ~/.gitconfig.local

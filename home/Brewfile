@@ -1,69 +1,143 @@
-tap "aws/tap"
-tap "hashicorp/tap"
-tap "heroku/brew"
-tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/cask-fonts"
-tap "homebrew/core"
-tap "joemiller/taps"
-tap "jtyr/repo"
-tap "reactiveops/tap"
-tap "sammy007/cryptonight"
-tap "skeema/tap"
-tap "stylemistake/formulae"
-brew "python@3.10"
-brew "ansible"
+tap "1password/tap"
+tap "ankitpokhrel/jira-cli"
+tap "localstack/tap"
+tap "rockymadden/rockymadden"
+# Record and share terminal sessions
 brew "asciinema"
-brew "coreutils"
+# Extendable version manager with support for Ruby, Node.js, Erlang & more
 brew "asdf"
-brew "python@3.9"
+# Official Amazon AWS command-line interface
 brew "awscli"
+# Bourne-Again SHell, a UNIX command interpreter
+brew "bash"
+# Programmable completion for Bash 4.2+
 brew "bash-completion@2"
+# Concurrent, cache-efficient, and Dockerfile-agnostic builder toolkit
 brew "buildkit"
-brew "libssh2"
-brew "openldap"
+# Statistics utility to count lines of code
+brew "cloc"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Get a file from an HTTP, HTTPS or FTP server
 brew "curl"
+# OWASP dependency-check
+brew "dependency-check"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
+# Lock file during command
+brew "flock"
+# GNU awk utility
 brew "gawk"
+# Interact with Google Gemini AI models from the command-line
+brew "gemini-cli"
+# GitHub command-line tool
 brew "gh"
+# Distributed revision control system
 brew "git"
+# Git extension for versioning large files
 brew "git-lfs"
+# Official GitLab CI runner
 brew "gitlab-runner"
-brew "unbound"
+# Open-source GitLab command-line tool
+brew "glab"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
+# GNU Transport Layer Security (TLS) Library
 brew "gnutls"
+# GNU Privacy Guard (OpenPGP)
 brew "gnupg"
+# Open source programming language to build simple/reliable/efficient software
 brew "go"
-brew "go-bindata"
+# GNU grep, egrep and fgrep
 brew "grep"
-brew "hub"
+# Improved top (interactive process viewer)
+brew "htop"
+# Tools and libraries to manipulate images in select formats
+brew "imagemagick"
+# Lightweight and flexible command-line JSON processor
 brew "jq"
-brew "k3d"
-brew "k9s"
-brew "krew"
-brew "libpq"
-brew "mysql-client", link: true
-brew "node"
-brew "nomad"
+# Handy way to save and run project-specific commands
+brew "just"
+# Validating, recursive, caching DNS resolver
+brew "unbound"
+# Utility for directing compilation
+brew "make"
+# Java-based project management
+brew "maven"
+# Port scanning utility for large networks
+brew "nmap"
+# Manage multiple Node.js versions
+brew "nvm"
+# Tools for one-time password authentication systems
+brew "oath-toolkit"
+# Development kit for the Java programming language
+brew "corretto@21"
+# OpenBSD freely-licensed SSH connectivity tools
+brew "openssh"
+# Shell command parallelization utility
 brew "parallel"
-brew "postgresql"
+# Python dependency management tool
+brew "pipenv"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
+# Framework for managing multi-language pre-commit hooks
+brew "pre-commit"
+# Show ps output as a tree
 brew "pstree"
-brew "tcl-tk"
-brew "python@3.8"
-brew "redis"
+# Python version management
+brew "pyenv"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# Safe, concurrent, practical language
+brew "rust"
+# Easily detect and prevent bugs and anti-patterns in your codebase
+brew "semgrep"
+# Command-line toolkit for Salesforce development
+brew "sf"
+# Static analysis and lint tool, for (ba)sh scripts
 brew "shellcheck"
-brew "siege"
+# Export Slack data without admin privileges
+brew "slackdump"
+# Editor of encrypted files
 brew "sops"
+# Proxy server that works as a poor man's VPN
 brew "sshuttle"
-brew "stern"
-brew "thefuck"
+# Terraform version manager inspired by rbenv
+brew "tfenv"
+# Terminal multiplexer
 brew "tmux"
+# Display directories as trees (with optional color/HTML output)
 brew "tree"
-brew "vault"
+# Vulnerability scanner for container images, file systems, and Git repos
+brew "trivy"
+# Executes a program periodically, showing output fullscreen
 brew "watch"
+# Internet file retriever
 brew "wget"
+# Tools for the WireGuard secure network tunnel
 brew "wireguard-tools"
-brew "aws/tap/ec2-instance-selector"
-brew "hashicorp/tap/consul"
-brew "joemiller/taps/vault-token-helper"
-brew "jtyr/repo/gbt-git", args: ["HEAD"]
+# JavaScript package manager
+brew "yarn"
+# Process YAML, JSON, XML, CSV and properties documents from the CLI
+brew "yq"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Feature-rich interactive Jira command-line
+brew "ankitpokhrel/jira-cli/jira-cli"
+# Localstack cli packaged using pyinstaller
+brew "localstack/tap/localstack-cli"
+brew "rockymadden/rockymadden/slack-cli"
+# Command-line interface for 1Password
+cask "1password-cli"
+# Terminal-based AI coding assistant
+cask "claude-code"
+cask "font-dejavu-sans-mono-nerd-font"
 cask "font-hack-nerd-font"
-cask "google-cloud-sdk"
+# Set of tools to manage resources and applications hosted on Google Cloud
+cask "gcloud-cli"
+# Tools to protect your emails and files
+cask "gpg-suite"
+# GUI replacement for the Java command-line utilities keytool and jarsigner
+cask "keystore-explorer"
+# Reverse proxy, secure introspectable tunnels to localhost
+cask "ngrok"

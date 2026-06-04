@@ -8,6 +8,9 @@ function asdf_install_plugins() {
     done < ~/.asdf-plugins
 }
 
-source $(brew --prefix asdf)/asdf.sh
-asdf_install_plugins
+INSTALL_PATH="$(brew --prefix asdf)/libexec/asdf.sh"
+if [ -e "$INSTALL_PATH" ]; then
+  source $INSTALL_PATH
+  asdf_install_plugins
+fi
 

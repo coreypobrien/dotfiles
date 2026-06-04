@@ -1,0 +1,138 @@
+aws_sso_cache_sessions() {
+  local cfg="${AWS_CONFIG_FILE:-$HOME/.aws/config}"
+  local cache="${AWS_SSO_CACHE_DIR:-$HOME/.aws/sso/cache}"
+
+  command -v jq >/dev/null 2>&1 || { echo "jq is required"; return 1; }
+  command -v shasum >/dev/null 2>&1 || { echo "shasum is required"; return 1; }
+  [[ -f "$cfg" ]] || { echo "Config not found: $cfg"; return 1; }
+  [[ -d "$cache" ]] || { echo "Cache dir not found: $cache"; return 1; }
+
+  _sha1() { printf '%s' "$1" | shasum -a 1 | awk '{print $1}'; }
+
+  _is_token() { jq -e 'has("accessToken") and has("expiresAt")' "$1" >/dev/null 2>&1; }
+
+  _expires_at() { jq -r '.expiresAt // ""' "$1" 2>/dev/null; }
+
+  _now_epoch() { date -u +%s; }
+
+  _iso_to_epoch() {
+    local iso="$1"
+    [[ -n "$iso" ]] || { echo ""; return; }
+
+    # macOS: date -j -f
+    if date -u -j -f "%Y-%m-%dT%H:%M:%SZ" "$iso" "+%s" >/dev/null 2>&1; then
+      date -u -j -f "%Y-%m-%dT%H:%M:%SZ" "$iso" "+%s"
+      return
+    fi
+
+    # Linux: date -d
+    if date -u -d "$iso" "+%s" >/dev/null 2>&1; then
+      date -u -d "$iso" "+%s"
+      return
+    fi
+
+    echo ""
+  }
+
+  _friendly_delta() {
+    local exp_iso="$1"
+    [[ -n "$exp_iso" ]] || { echo ""; return; }
+
+    local now exp delta abs mins hours days
+    now="$(_now_epoch)"
+    exp="$(_iso_to_epoch "$exp_iso")"
+    [[ -n "$exp" ]] || { echo ""; return; }
+
+    delta=$(( exp - now ))
+    if (( delta <= 0 )); then
+      echo "(Expired)"
+      return
+    fi
+
+    mins=$(( (delta + 59) / 60 )) # ceil to minutes
+    if (( mins < 60 )); then
+      echo "(In ${mins} mins)"
+      return
+    fi
+
+    hours=$(( (mins + 59) / 60 )) # ceil to hours
+    if (( hours < 48 )); then
+      echo "(In ${hours} hrs)"
+      return
+    fi
+
+    days=$(( (hours + 23) / 24 )) # ceil to days
+    echo "(In ${days} days)"
+  }
+
+  _format_expiration() {
+    local iso="$1"
+    [[ -n "$iso" ]] || { echo ""; return; }
+    printf "%s %s" "$iso" "$(_friendly_delta "$iso")"
+  }
+
+  # Build unique session rows:
+  # - sso-session: (name, start_url)
+  # - legacy: start_url for profiles without sso_session
+  local tmp
+  tmp="$(mktemp)"
+  trap 'rm -f "$tmp"' RETURN
+
+  awk '
+    BEGIN { kind=""; name=""; }
+    /^[[:space:]]*$/ { next }
+    /^[[:space:]]*[#;]/ { next }
+    /^\[.*\]$/ {
+      sec=$0; gsub(/^\[|\]$/, "", sec)
+      if (sec ~ /^sso-session[[:space:]]+/) {
+        kind="sso"; name=sec; sub(/^sso-session[[:space:]]+/, "", name)
+        sso_start=""
+      } else if (sec ~ /^profile[[:space:]]+/) {
+        kind="profile"; name=sec; sub(/^profile[[:space:]]+/, "", name)
+        p_has_session[name]=0; p_start[name]=""
+      } else { kind=""; name=""; }
+      next
+    }
+    {
+      line=$0; sub(/^[[:space:]]+/, "", line)
+      split(line,a,"="); if (length(a)<2) next
+      k=a[1]; v=line; sub(/^[^=]*=[[:space:]]*/, "", v)
+      gsub(/[[:space:]]+$/, "", k); gsub(/^[[:space:]]+|[[:space:]]+$/, "", v)
+
+      if (kind=="sso") {
+        if (k=="sso_start_url") sso_start=v
+        su[name]=sso_start
+      } else if (kind=="profile") {
+        if (k=="sso_session") p_has_session[name]=1
+        if (k=="sso_start_url") p_start[name]=v
+      }
+    }
+    END {
+      for (s in su) printf "sso-session\t%s\t%s\n", s, su[s]
+      for (p in p_start) if (p_has_session[p]==0 && p_start[p]!="") printf "legacy\t%s\n", p_start[p]
+    }
+  ' "$cfg" | sort -u > "$tmp"
+
+  printf "key\tscope\texpiration\n"
+
+  while IFS=$'\t' read -r scope key start_url; do
+    local token_file="" exp_iso="" exp_fmt=""
+
+    if [[ "$scope" == "sso-session" ]]; then
+      token_file="$cache/$(_sha1 "$key").json"
+      if [[ -f "$token_file" ]] && _is_token "$token_file"; then
+        exp_iso="$(_expires_at "$token_file")"
+      fi
+    else
+      # legacy: key is the start_url itself
+      token_file="$cache/$(_sha1 "$key").json"
+      if [[ -f "$token_file" ]] && _is_token "$token_file"; then
+        exp_iso="$(_expires_at "$token_file")"
+      fi
+    fi
+
+    [[ -n "$exp_iso" ]] && exp_fmt="$(_format_expiration "$exp_iso")"
+
+    printf "%s\t%s\t%s\n" "$key" "$scope" "$exp_fmt"
+  done < "$tmp"
+}

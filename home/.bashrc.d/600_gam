@@ -1,0 +1,3 @@
+function gam() { "/Users/coreyobrien/bin/gam/gam" "$@" ; }
+
+alias gam="/Users/coreyobrien/bin/gam/gam"

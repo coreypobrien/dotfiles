@@ -1,0 +1,7 @@
+export PATH="$(brew --prefix openjdk@21)/bin:$PATH"
+export CPPFLAGS="$CPPFLAGS -I$(brew --prefix openjdk@21)/include"
+export JAVA_HOME="$(brew --prefix openjdk@21)"
+
+# sudo ln -sfn /opt/homebrew/opt/openjdk/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+
+alias startmvnscanner="java -jar /Users/coreyobrien/.m2/repository/com/intuit/maven-build-scanner/2.0.0-SNAPSHOT/maven-build-scanner-2.0.0-SNAPSHOT-jar-with-dependencies.jar"
