@@ -71,7 +71,7 @@ brew "nvm"
 # Tools for one-time password authentication systems
 brew "oath-toolkit"
 # Development kit for the Java programming language
-brew "corretto@21"
+cask "corretto@21"
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
 # Shell command parallelization utility
